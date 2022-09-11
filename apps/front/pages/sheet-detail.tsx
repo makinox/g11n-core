@@ -1,15 +1,14 @@
 import Footer from '../common/components/Footer/Footer';
 import Navbar from '../common/components/Navbar/Navbar';
-import Hero from '../modules/index/components/hero/hero';
 
-const Home = () => {
+const SheetDetail = () => {
   return (
     <>
       <Navbar />
-      <Hero />
+      <h1>Sheet detail</h1>
       <Footer />
     </>
   );
 };
 
-export default Home;
+export default SheetDetail;

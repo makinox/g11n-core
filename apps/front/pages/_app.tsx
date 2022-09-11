@@ -1,18 +1,11 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import './styles.css';
+import '@makinox/makinox-ui/dist/index.css';
+import type { AppProps } from 'next/app';
 
-function CustomApp({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Head>
-        <title>Welcome to front!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
-  );
+import '../styles/globals.css';
+import '../styles/colors.css';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
 }
 
-export default CustomApp;
+export default MyApp;
