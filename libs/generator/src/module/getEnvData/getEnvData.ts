@@ -1,4 +1,4 @@
-import { EviromentVariables } from '../../common/config/constants';
+import configEnvs from '../../../g11n.config';
 
 const getSheetTitle = (): string => {
   const sheetArgument = process.argv.filter((argument) => argument.includes('--sheet='))[0];
@@ -8,17 +8,21 @@ const getSheetTitle = (): string => {
 
 export const getEnvData = () => {
   const sheetArgument = getSheetTitle();
-  const googleSheetId = process.env[EviromentVariables.GOOGLE_SHEET_ID] as string;
-  const googleClientEmail = process.env[EviromentVariables.GOOGLE_CLIENT_EMAIL] as string;
-  const googlePrivateKey = process.env[EviromentVariables.GOOGLE_PRIVATE_KEY]?.replace(/\\n/g, '\n') as string;
+  const translationDir = configEnvs.TRANSLATION_DIR;
+  const googleSheetId = configEnvs.GOOGLE_SHEET_ID;
+  const googleSheetDefaultTitle = configEnvs.GOOGLE_SHEET_DEFAULT_TITLES;
+  const googleClientEmail = configEnvs.GOOGLE_CLIENT_EMAIL;
+  const googlePrivateKey = configEnvs.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') as string;
 
-  const aVariableIsMissing = [googleSheetId, googleClientEmail, googlePrivateKey].some((variable) => variable === undefined);
+  const aVariableIsMissing = [googleSheetId, googleClientEmail, googlePrivateKey, translationDir].some((variable) => variable === undefined);
   if (aVariableIsMissing) throw new Error('One or more variables are missing');
 
   return {
     sheetArgument,
     googleSheetId,
-    googleClientEmail,
+    translationDir,
     googlePrivateKey,
+    googleClientEmail,
+    googleSheetDefaultTitle,
   };
 };
