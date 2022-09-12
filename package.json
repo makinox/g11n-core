@@ -8,6 +8,7 @@
     "@makinox/makinox-ui": "1.6.7",
     "@stitches/core": "1.2.8",
     "core-js": "3.6.5",
+    "encoding": "^0.1.13",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import fs from 'fs';
 
 import { SheetResult } from '../../types';
@@ -11,6 +13,6 @@ export const writeJsonFile = (data: SheetResult) => {
 
     if (!fs.existsSync(evnviromentData.translationDir)) fs.mkdirSync(evnviromentData.translationDir, { recursive: true });
 
-    fs.writeFileSync(`${evnviromentData.translationDir}/${key}.json`, JSON.stringify(tempObject, null, 2), { flag: 'wx' });
+    fs.writeFileSync(`${evnviromentData.translationDir}/${key}.json`, JSON.stringify(tempObject, null, 2), { flag: 'w' });
   });
 };

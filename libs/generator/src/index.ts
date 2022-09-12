@@ -1,1 +1,1 @@
-export * from './module/generator/generator';
+export * from './module';

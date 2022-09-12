@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "type": "commonjs",
   "devDependencies": {
-    "@types/google-spreadsheet": "^3.3.0",
+    "@types/google-spreadsheet": "3.3.0",
+    "google-spreadsheet": "3.3.0",
     "@types/node": "^18.7.16",
-    "google-spreadsheet": "^3.3.0",
     "ts-node": "^10.9.1"
   }
 }

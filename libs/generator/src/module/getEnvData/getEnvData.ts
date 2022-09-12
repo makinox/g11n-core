@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import configEnvs from '../../../g11n.config';
 
 const getSheetTitle = (): string => {
-  const sheetArgument = process.argv.filter((argument) => argument.includes('--sheet='))[0];
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const maskedProcess: any = process;
+  const sheetArgument = maskedProcess.argv.filter((argument: any) => argument.includes('--sheet='))[0] as any;
   const sheetName = sheetArgument?.split('=')[1] || 'All';
   return sheetName;
 };
