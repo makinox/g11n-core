@@ -1,17 +1,24 @@
-// import { getInitializedSheet } from '@g11n-core/generator';
+import { useSheet } from '../../../../common/contexts/sheetContext';
 
-const Hero = (props) => {
-  console.log({ props });
+const Hero = () => {
+  const { languageKeys, languageTuples, sheetTitles } = useSheet();
+  console.log({ languageKeys, languageTuples, sheetTitles });
   return (
     <section>
       <div>
         <span>metricas</span>
-        <span>cuantas traducciones hay</span>
+        <div>
+          cuantas traducciones hay
+          {languageKeys.map((lang, index) => (
+            <span key={index}>{lang}</span>
+          ))}
+        </div>
         <span>si es posible cuantos usos de api hay</span>
       </div>
 
       <div>
         <span>hojas disponibles</span>
+        <span>espacios sin traducir</span>
       </div>
 
       <div>
@@ -20,13 +27,5 @@ const Hero = (props) => {
     </section>
   );
 };
-
-// export async function getStaticProps() {
-//   const initializedSheet = await getInitializedSheet();
-
-//   return {
-//     props: { initializedSheet }, // will be passed to the page component as props
-//   };
-// }
 
 export default Hero;

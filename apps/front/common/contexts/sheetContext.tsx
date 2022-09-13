@@ -1,31 +1,35 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
-type SheetContextState = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  enviromentData: any;
+import { GetInitialDataResponse, GetInitialDataType } from '../../pages/api/getInitialData';
+
+type SheetContextState = Partial<Pick<GetInitialDataType, 'languageKeys' | 'languageTuples' | 'sheetTitles'>>;
+
+const fetchSheetAccountData = async () => {
+  const res = await fetch('api/getInitialData');
+  const data: GetInitialDataResponse = await res.json();
+
+  if (res.status !== 200 && 'message' in data) {
+    throw new Error(data.message);
+  }
+  return data as GetInitialDataType;
 };
 
 export const SheetContext = createContext<SheetContextState | undefined>(undefined);
 
 export const SheetProvider = ({ children }) => {
+  const [languageKeys, setLanguageKeys] = useState<GetInitialDataType['languageKeys']>([]);
+  const [languageTuples, setLanguageTuples] = useState<GetInitialDataType['languageTuples']>({});
+  const [sheetTitles, setSheetTitles] = useState<GetInitialDataType['sheetTitles']>([]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('api/getInitialData');
-      const data = await res.json();
-      console.log({ data });
-    };
-    fetchData();
+    fetchSheetAccountData().then(({ languageKeys, languageTuples, sheetTitles }) => {
+      setLanguageKeys(languageKeys);
+      setLanguageTuples(languageTuples);
+      setSheetTitles(sheetTitles);
+    });
   }, []);
 
-  return (
-    <SheetContext.Provider
-      value={{
-        enviromentData: {},
-      }}
-    >
-      {children}
-    </SheetContext.Provider>
-  );
+  return <SheetContext.Provider value={{ languageKeys, languageTuples, sheetTitles }}>{children}</SheetContext.Provider>;
 };
 
 export const useSheet = () => {
