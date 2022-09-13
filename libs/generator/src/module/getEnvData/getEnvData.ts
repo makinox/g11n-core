@@ -14,7 +14,7 @@ export const getEnvData = () => {
   const sheetArgument = getSheetTitle();
   const translationDir = configEnvs.TRANSLATION_DIR;
   const googleSheetId = configEnvs.GOOGLE_SHEET_ID;
-  const googleSheetDefaultTitle = configEnvs.GOOGLE_SHEET_DEFAULT_TITLES;
+  const googleSheetDefaultTitles = configEnvs.GOOGLE_SHEET_DEFAULT_TITLES;
   const googleClientEmail = configEnvs.GOOGLE_CLIENT_EMAIL;
   const googlePrivateKey = configEnvs.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') as string;
 
@@ -27,6 +27,6 @@ export const getEnvData = () => {
     translationDir,
     googlePrivateKey,
     googleClientEmail,
-    googleSheetDefaultTitle,
+    googleSheetDefaultTitles,
   };
 };

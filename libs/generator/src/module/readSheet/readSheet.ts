@@ -5,22 +5,28 @@ import { SheetResult } from '../../types';
 
 const evnviromentData = getEnvData();
 
+export const getSheetTitles = () =>
+  evnviromentData.sheetArgument === 'All' ? evnviromentData.googleSheetDefaultTitles : [evnviromentData.sheetArgument];
+
 export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
   await sheetDocument.loadInfo();
   const languageTuples: SheetResult = {};
-  const sheetTitles = evnviromentData.sheetArgument === 'All' ? ['Main'] : [evnviromentData.sheetArgument];
+  const sheetTitles = getSheetTitles();
+  const languageKeys: Array<string[]> = [];
 
   for await (const title of sheetTitles) {
     const sheet = sheetDocument.sheetsByTitle[title];
     await sheet.loadHeaderRow();
+
     const columnTitles = sheet.headerValues;
     const sheetRows = await sheet.getRows({ limit: sheet.rowCount, offset: 0 });
-    const languageKeys = columnTitles.slice(1);
+    const currentLanguagueKeys = columnTitles.slice(1);
+    languageKeys.push(currentLanguagueKeys);
 
-    languageKeys.forEach((langKey) => Object.defineProperty(languageTuples, langKey, { enumerable: true, writable: true, value: {} }));
+    currentLanguagueKeys.forEach((langKey) => Object.defineProperty(languageTuples, langKey, { enumerable: true, writable: true, value: {} }));
 
     sheetRows.map((row) => {
-      languageKeys.forEach((langKey) => {
+      currentLanguagueKeys.forEach((langKey) => {
         const translationKey = row[columnTitles[0]];
         const rowValue = row[langKey] || undefined;
 
@@ -33,5 +39,5 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
     });
   }
 
-  return languageTuples;
+  return { languageTuples, languageKeys };
 };

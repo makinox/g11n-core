@@ -6,7 +6,7 @@ const initializedSheet = getInitializedSheet();
 
 initializedSheet
   .then((sheetDocument) => readSheet(sheetDocument))
-  .then((data) => writeJsonFile(data))
+  .then(({ languageTuples }) => writeJsonFile(languageTuples))
   .catch((error) => {
     throw new Error(error);
   });
