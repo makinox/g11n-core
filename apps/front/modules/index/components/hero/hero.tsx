@@ -1,4 +1,4 @@
-import { FluidContainer, ButtonOutline } from '@makinox/makinox-ui';
+import { FluidContainer, ButtonOutline, Card } from '@makinox/makinox-ui';
 import { Fragment, useMemo } from 'react';
 
 import { useSheet } from '../../../../common/contexts/sheetContext';
@@ -24,31 +24,50 @@ const Hero = () => {
     <section className={`flex flex-col ${FluidContainer()}`}>
       <div className="flex justify-around">
         <div>
-          <div>
-            <span>cuantas traducciones hay:</span>
-            <div>
-              {languageKeys[0]?.map((lang, index) => (
-                <Fragment key={index}>
-                  <span>{lang}</span>
-                  <span>-</span>
-                </Fragment>
-              ))}
+          <article className={Card()} style={{ margin: '10px 0' }}>
+            <div className="card-header">
+              <h6 className="headline6">Cuantas traducciones hay</h6>
+              <span className="subtitle1">
+                {languageKeys[0]?.map((lang, index) => (
+                  <Fragment key={index}>
+                    <span style={{ margin: '0 2px' }}>{lang}</span>
+                  </Fragment>
+                ))}
+              </span>
             </div>
-          </div>
-          <div>
-            <span>Hojas disponibles</span>
-            <div>
-              {sheetTitles.map((titles, index) => (
-                <span key={index}>{titles}</span>
-              ))}
+          </article>
+
+          <article className={Card()} style={{ margin: '10px 0' }}>
+            <div className="card-header">
+              <h6 className="headline6">Hojas disponibles</h6>
+              <span className="subtitle1">
+                {sheetTitles.map((titles, index) => (
+                  <span key={index}>{titles}</span>
+                ))}
+              </span>
             </div>
-          </div>
+          </article>
         </div>
 
         <div className="flex flex-col">
-          <span>Total de traducciones: {totalData.totalTranslations}</span>
-          <span>Total de traducciones por idioma: {totalData.totalTranslationsByLang}</span>
-          <span>Total espacios sin traducir: {totalData.totalEmptyTranslation}</span>
+          <article className={Card()} style={{ margin: '10px 0' }}>
+            <div className="card-header">
+              <h6 className="headline6">Total de traducciones</h6>
+              <span className="subtitle1">{totalData.totalTranslations}</span>
+            </div>
+          </article>
+          <article className={Card()} style={{ margin: '10px 0' }}>
+            <div className="card-header">
+              <h6 className="headline6">Total de traducciones por idioma</h6>
+              <span className="subtitle1">{totalData.totalTranslationsByLang}</span>
+            </div>
+          </article>
+          <article className={Card()} style={{ margin: '10px 0' }}>
+            <div className="card-header">
+              <h6 className="headline6">Total espacios sin traducir</h6>
+              <span className="subtitle1">{totalData.totalEmptyTranslation}</span>
+            </div>
+          </article>
         </div>
       </div>
 
