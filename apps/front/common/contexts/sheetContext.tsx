@@ -9,7 +9,7 @@ const fetchSheetAccountData = async () => {
   const data: GetInitialDataResponse = await res.json();
 
   if (res.status !== 200 && 'message' in data) {
-    throw new Error(data.message);
+    new Error(data.message);
   }
   return data as GetInitialDataType;
 };

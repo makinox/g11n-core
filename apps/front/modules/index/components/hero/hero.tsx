@@ -47,6 +47,14 @@ const Hero = () => {
               </span>
             </div>
           </article>
+
+          <div className="flex justify-left">
+            {sheetTitles.map((titles) => (
+              <button key={titles} className={ButtonOutline()}>
+                Ir a la hoja {titles}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col">
@@ -68,11 +76,10 @@ const Hero = () => {
               <span className="subtitle1">{totalData.totalEmptyTranslation}</span>
             </div>
           </article>
+          <div className="flex justify-left">
+            <button className={ButtonOutline()}>agregar mas traducciones</button>
+          </div>
         </div>
-      </div>
-
-      <div className="flex justify-center">
-        <button className={ButtonOutline()}>agregar mas traducciones</button>
       </div>
     </section>
   );
