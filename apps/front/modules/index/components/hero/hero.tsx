@@ -22,7 +22,7 @@ const Hero = () => {
   }, [languageTuples]);
 
   return (
-    <section className={`flex flex-col ${FluidContainer()}`}>
+    <section className={`flex flex-col ${FluidContainer()}`} style={{ marginTop: '20px' }}>
       <div className="flex justify-around">
         <div>
           <article className={Card()} style={{ margin: '10px 0' }}>

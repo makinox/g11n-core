@@ -33,14 +33,21 @@ const Sheet = () => {
   return (
     <>
       <Navbar />
-      <section className={FluidContainer()}>
-        <div style={{ marginTop: '10px' }}>
+      <section className={FluidContainer()} style={{ marginTop: '20px' }}>
+        <div>
           <Link href="/">
             <button className={ButtonOutline()}>Ir atras</button>
           </Link>
         </div>
         <div className="flex justify-center">
           <TranslateTable tableHeaders={tableHeaders} tableBodyValues={tableBodyValues} />
+        </div>
+        <div className="flex justify-center">
+          <Link href="/">
+            <button className={ButtonOutline()} style={{ marginTop: '20px' }}>
+              agregar mas traducciones
+            </button>
+          </Link>
         </div>
       </section>
     </>
