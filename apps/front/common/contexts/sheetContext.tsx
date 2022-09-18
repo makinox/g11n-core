@@ -1,11 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { GetInitialDataResponse, GetInitialDataType } from '../../pages/api/getInitialData';
+import { networkOrigin } from '../constants';
 
 type SheetContextState = Partial<Pick<GetInitialDataType, 'languageKeys' | 'languageTuples' | 'sheetTitles'>>;
 
 const fetchSheetAccountData = async () => {
-  const res = await fetch('api/getInitialData');
+  const res = await fetch(`${networkOrigin}/api/getInitialData`);
   const data: GetInitialDataResponse = await res.json();
 
   if (res.status !== 200 && 'message' in data) {

@@ -1,5 +1,6 @@
 import { FluidContainer, ButtonOutline, Card } from '@makinox/makinox-ui';
 import { Fragment, useMemo } from 'react';
+import Link from 'next/link';
 
 import { useSheet } from '../../../../common/contexts/sheetContext';
 
@@ -50,9 +51,9 @@ const Hero = () => {
 
           <div className="flex justify-left">
             {sheetTitles.map((titles) => (
-              <button key={titles} className={ButtonOutline()}>
-                Ir a la hoja {titles}
-              </button>
+              <Link key={titles} href={`sheet/${titles}`}>
+                <button className={ButtonOutline()}>Ir a la hoja {titles}</button>
+              </Link>
             ))}
           </div>
         </div>
