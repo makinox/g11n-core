@@ -8,7 +8,7 @@ const Hero = () => {
   const { languageKeys, languageTuples, sheetTitles } = useSheet();
 
   const totalData = useMemo(() => {
-    const languageValues = Object.values(languageTuples);
+    const languageValues = Object.values(languageTuples || {});
     const totalTranslationsByLang = languageValues[0] ? Object.values(languageValues[0]).length : 0;
 
     const totalTranslations: Array<string> = [];
@@ -78,7 +78,9 @@ const Hero = () => {
             </div>
           </article>
           <div className="flex justify-left">
-            <button className={ButtonOutline()}>agregar mas traducciones</button>
+            <Link href="/add">
+              <button className={ButtonOutline()}>agregar mas traducciones</button>
+            </Link>
           </div>
         </div>
       </div>

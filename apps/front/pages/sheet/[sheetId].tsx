@@ -43,7 +43,7 @@ const Sheet = () => {
           <TranslateTable tableHeaders={tableHeaders} tableBodyValues={tableBodyValues} />
         </div>
         <div className="flex justify-center">
-          <Link href="/">
+          <Link href="/add">
             <button className={ButtonOutline()} style={{ marginTop: '20px' }}>
               agregar mas traducciones
             </button>
