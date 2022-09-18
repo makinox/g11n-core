@@ -1,6 +1,8 @@
+import { TranslateTableStyles } from './translateTable.styles';
+
 const TranslateTable = ({ tableHeaders, tableBodyValues }: { tableHeaders: Array<string>; tableBodyValues: Array<Array<string>> }) => {
   return (
-    <table>
+    <table className={TranslateTableStyles()}>
       <thead>
         <tr>
           {tableHeaders.map((header) => (

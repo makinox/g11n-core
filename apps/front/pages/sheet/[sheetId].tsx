@@ -39,7 +39,7 @@ const Sheet = () => {
             <button className={ButtonOutline()}>Ir atras</button>
           </Link>
         </div>
-        <div>
+        <div className="flex justify-center">
           <TranslateTable tableHeaders={tableHeaders} tableBodyValues={tableBodyValues} />
         </div>
       </section>
