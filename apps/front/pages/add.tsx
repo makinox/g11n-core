@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AddPageStyles } from '../modules/add/styles/add.styles';
 import { useSheet } from '../common/contexts/sheetContext';
 import Navbar from '../common/components/Navbar/Navbar';
+import { networkOrigin } from '../common/constants';
 
 const FORM_SHEET_NAME = 'sheetName';
 const FORM_KEY_NAME = 'keyName';
@@ -39,7 +40,10 @@ const Add = () => {
     currentKeyValue.forEach((formKeyValue) =>
       Object.defineProperty(formData, formKeyValue, { enumerable: true, writable: true, value: formElement.elements[formKeyValue].value })
     );
-    console.log({ formData });
+    fetch(`${networkOrigin}/api/addNewElement`, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+    });
   };
 
   return (
