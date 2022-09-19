@@ -20,7 +20,7 @@ const Add = () => {
   };
 
   const currentKeyValue = useMemo(() => {
-    return languageKeys[selectedSheet].map((value) => `keyValue-${value}`);
+    return languageKeys[selectedSheet]?.map((value) => `keyValue-${value}`) || [];
   }, [languageKeys, selectedSheet]);
 
   const handleSheetChange = (event: ChangeEvent<HTMLSelectElement>) => {
