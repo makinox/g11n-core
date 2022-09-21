@@ -1,11 +1,12 @@
 import { deleteARow, getInitializedSheet } from '@g11n-core/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { errorMessages } from '../../common/constants';
 import { GeneralRestError } from '../../common/types';
 
 const removeElement = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body, method } = req;
-  if (method !== 'DELETE') return res.status(403).json({ message: 'Not found', error: true });
+  if (method !== 'DELETE') return res.status(403).json({ message: errorMessages.NOT_FOUND, error: true });
 
   const { deleteIndex, sheetTitle } = JSON.parse(body);
 
@@ -15,7 +16,7 @@ const removeElement = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log({ data });
       res.status(200).json({ deletedIndex: deleteIndex, error: false });
     })
-    .catch(() => res.status(403).json({ message: 'Not found', error: true }));
+    .catch(() => res.status(403).json({ message: errorMessages.NOT_FOUND, error: true }));
 };
 
 export type removeElementType = {

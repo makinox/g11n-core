@@ -1,6 +1,7 @@
 import { getInitializedSheet, postARow } from '@g11n-core/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { errorMessages } from '../../common/constants';
 import { GeneralRestError } from '../../common/types';
 
 const formatKey = (element: string) => {
@@ -11,7 +12,7 @@ const formatKey = (element: string) => {
 
 const addNewElement = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body, method } = req;
-  if (method !== 'POST') return res.status(403).json({ message: 'Not found', error: true });
+  if (method !== 'POST') return res.status(403).json({ message: errorMessages.NOT_FOUND, error: true });
 
   const parsedBody: Record<string, string> = JSON.parse(body);
   const formatToCreateNewRow = {
@@ -28,7 +29,7 @@ const addNewElement = async (req: NextApiRequest, res: NextApiResponse) => {
       const createdIndex = data.rowIndex;
       res.status(200).json({ createdIndex, error: false });
     })
-    .catch(() => res.status(403).json({ message: 'Not found', error: true }));
+    .catch(() => res.status(403).json({ message: errorMessages.NOT_FOUND, error: true }));
 };
 
 export type addNewElementType = {

@@ -1,4 +1,6 @@
+import { errorMessages } from './constants';
+
 export type GeneralRestError = {
-  message: string;
+  message: errorMessages;
   error: boolean;
 };

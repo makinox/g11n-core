@@ -1,8 +1,10 @@
 import { getEnvData, getInitializedSheet, readSheet, SheetResult } from '@g11n-core/generator';
+
+import { errorMessages } from '../../common/constants';
 import { GeneralRestError } from '../../common/types';
 
 const getInitialData = (req, res) => {
-  if (req.method !== 'GET') return res.status(403).json({ message: 'Not found', error: true });
+  if (req.method !== 'GET') return res.status(403).json({ message: errorMessages.NOT_FOUND, error: true });
   getInitializedSheet()
     .then(async (initializedSheet) => {
       const evnviromentData = getEnvData();
@@ -11,7 +13,7 @@ const getInitialData = (req, res) => {
 
       res.status(200).json({ sheetTitles, languageKeys, languageTuples, error: false });
     })
-    .catch(() => res.status(403).json({ message: 'Not found', error: true }));
+    .catch(() => res.status(403).json({ message: errorMessages.NOT_FOUND, error: true }));
 };
 
 export type GetInitialDataType = {
