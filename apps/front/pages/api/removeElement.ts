@@ -12,8 +12,7 @@ const removeElement = async (req: NextApiRequest, res: NextApiResponse) => {
 
   getInitializedSheet()
     .then(async (initializedSheet) => {
-      const data = await deleteARow(initializedSheet, deleteIndex, sheetTitle);
-      console.log({ data });
+      await deleteARow(initializedSheet, deleteIndex, sheetTitle);
       res.status(200).json({ deletedIndex: deleteIndex, error: false });
     })
     .catch(() => res.status(403).json({ message: errorMessages.NOT_FOUND, error: true }));

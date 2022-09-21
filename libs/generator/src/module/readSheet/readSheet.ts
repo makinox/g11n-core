@@ -22,7 +22,6 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
     const sheetRows = await sheet.getRows({ limit: sheet.rowCount, offset: 0 });
     const currentLanguagueKeys = columnTitles.slice(1);
     languageKeys.push(currentLanguagueKeys);
-    console.log({ languageTuples });
 
     currentLanguagueKeys.forEach((langKey) => {
       const tupleRef = languageTuples[langKey];
@@ -41,8 +40,6 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
       });
     });
   }
-
-  // console.log({ sheetTitles, languageTuples });
 
   return { languageTuples, languageKeys };
 };
