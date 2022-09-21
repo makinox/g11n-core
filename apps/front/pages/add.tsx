@@ -20,9 +20,15 @@ const Add = () => {
     label: 'text-center',
   };
 
-  const currentKeyValue = useMemo(() => {
-    return languageKeys[selectedSheet]?.map((value) => `keyValue-${value}`) || [];
+  const unformatedKeys = useMemo(() => {
+    if (!languageKeys) return [];
+    return languageKeys[selectedSheet];
   }, [languageKeys, selectedSheet]);
+
+  const currentKeyValue = useMemo(() => {
+    if (!unformatedKeys?.length) return [];
+    return unformatedKeys?.map((value) => `keyValue-${value}`) || [];
+  }, [unformatedKeys]);
 
   const handleSheetChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const optionElement = event.target;
@@ -30,7 +36,7 @@ const Add = () => {
     setSelectedSheet(selectedIndex);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
     const formData = {
@@ -40,10 +46,12 @@ const Add = () => {
     currentKeyValue.forEach((formKeyValue) =>
       Object.defineProperty(formData, formKeyValue, { enumerable: true, writable: true, value: formElement.elements[formKeyValue].value })
     );
-    fetch(`${networkOrigin}/api/addNewElement`, {
+    const response = await fetch(`${networkOrigin}/api/addNewElement`, {
       method: 'POST',
       body: JSON.stringify(formData),
     });
+    const data = await response.json();
+    console.log({ data });
   };
 
   return (
@@ -62,7 +70,7 @@ const Add = () => {
             <fieldset className={classes.fieldSet}>
               <label className={classes.label}>Seleccionar hoja</label>
               <select onChange={handleSheetChange} name={FORM_SHEET_NAME}>
-                {sheetTitles.map((title) => (
+                {sheetTitles?.map((title) => (
                   <option key={title} value={title}>
                     {title}
                   </option>
@@ -73,7 +81,7 @@ const Add = () => {
               <label className={classes.label}>Nombre de llave*</label>
               <input type="text" required name={FORM_KEY_NAME} />
             </fieldset>
-            {languageKeys[selectedSheet]?.map((langKey, index) => (
+            {unformatedKeys?.map((langKey, index) => (
               <fieldset key={langKey} className={classes.fieldSet}>
                 <label className={classes.label}>Valor {langKey}*</label>
                 <input type="text" required name={currentKeyValue[index]} />
