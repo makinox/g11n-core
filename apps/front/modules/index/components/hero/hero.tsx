@@ -43,16 +43,20 @@ const Hero = () => {
               <h6 className="headline6">Hojas disponibles</h6>
               <span className="subtitle1">
                 {sheetTitles.map((titles, index) => (
-                  <span key={index}>{titles}</span>
+                  <span key={index} style={{ margin: '0 1px' }}>
+                    {titles}
+                  </span>
                 ))}
               </span>
             </div>
           </article>
 
-          <div className="flex justify-left">
+          <div className="flex flex-col justify-left">
             {sheetTitles.map((titles) => (
               <Link key={titles} href={`sheet/${titles}`}>
-                <button className={ButtonOutline()}>Ir a la hoja {titles}</button>
+                <button className={ButtonOutline()} style={{ margin: '5px 0' }}>
+                  Ir a la hoja {titles}
+                </button>
               </Link>
             ))}
           </div>

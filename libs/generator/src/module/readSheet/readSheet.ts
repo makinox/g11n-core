@@ -22,14 +22,17 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
     const sheetRows = await sheet.getRows({ limit: sheet.rowCount, offset: 0 });
     const currentLanguagueKeys = columnTitles.slice(1);
     languageKeys.push(currentLanguagueKeys);
+    console.log({ languageTuples });
 
-    currentLanguagueKeys.forEach((langKey) => Object.defineProperty(languageTuples, langKey, { enumerable: true, writable: true, value: {} }));
+    currentLanguagueKeys.forEach((langKey) => {
+      const tupleRef = languageTuples[langKey];
+      if (!tupleRef) Object.defineProperty(languageTuples, langKey, { enumerable: true, writable: true, value: {} });
+    });
 
     sheetRows.map((row) => {
       currentLanguagueKeys.forEach((langKey) => {
         const translationKey = row[columnTitles[0]];
         const rowValue = row[langKey] || undefined;
-
         Object.defineProperty(languageTuples[langKey], translationKey, {
           value: rowValue,
           enumerable: true,
@@ -38,6 +41,8 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
       });
     });
   }
+
+  // console.log({ sheetTitles, languageTuples });
 
   return { languageTuples, languageKeys };
 };
