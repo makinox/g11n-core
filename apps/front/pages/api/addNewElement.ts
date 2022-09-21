@@ -1,4 +1,4 @@
-import { getInitializedSheet, postARrow } from '@g11n-core/generator';
+import { getInitializedSheet, postARow } from '@g11n-core/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { GeneralRestError } from '../../common/types';
@@ -24,7 +24,7 @@ const addNewElement = async (req: NextApiRequest, res: NextApiResponse) => {
 
   getInitializedSheet()
     .then(async (initializedSheet) => {
-      const data = await postARrow(initializedSheet, formatToCreateNewRow, parsedBody.sheetName);
+      const data = await postARow(initializedSheet, formatToCreateNewRow, parsedBody.sheetName);
       const createdIndex = data.rowIndex;
       res.status(200).json({ createdIndex, error: false });
     })

@@ -1,5 +1,5 @@
-// export * from './writeJsonFile/writeJsonFile';
 export * from './getInitializedSheet/getInitializedSheet';
 export * from './getEnvData/getEnvData';
+export * from './deleteARow/deleteARow';
 export * from './readSheet/readSheet';
-export * from './postARrow/postARrow';
+export * from './postARow/postARow';
