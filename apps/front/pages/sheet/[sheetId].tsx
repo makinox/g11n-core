@@ -10,7 +10,7 @@ import Navbar from '../../common/components/Navbar/Navbar';
 import { networkOrigin } from '../../common/constants';
 
 const Sheet = () => {
-  const { languageTuples } = useSheet();
+  const { languageTuples, fetchAllData } = useSheet();
   const router = useRouter();
 
   const handleDelete = async (deleteIndex: number) => {
@@ -23,7 +23,7 @@ const Sheet = () => {
     const data: removeElementResponse = await response.json();
     if (response.status !== 200 && 'message' in data) return new Error(data.message);
 
-    window.location.reload();
+    fetchAllData();
   };
 
   const tableHeaders = useMemo(() => {

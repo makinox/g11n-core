@@ -3,15 +3,15 @@ import React, { createContext, useEffect, useState } from 'react';
 import { GetInitialDataResponse, GetInitialDataType } from '../../pages/api/getInitialData';
 import { networkOrigin } from '../constants';
 
-type SheetContextState = Partial<Pick<GetInitialDataType, 'languageKeys' | 'languageTuples' | 'sheetTitles'>>;
+type SheetContextState = Partial<Pick<GetInitialDataType, 'languageKeys' | 'languageTuples' | 'sheetTitles'>> & {
+  fetchAllData: () => Promise<void>;
+};
 
 const fetchSheetAccountData = async () => {
   const res = await fetch(`${networkOrigin}/api/getInitialData`);
   const data: GetInitialDataResponse = await res.json();
 
-  if (res.status !== 200 && 'message' in data) {
-    new Error(data.message);
-  }
+  if (res.status !== 200 && 'message' in data) new Error(data.message);
   return data as GetInitialDataType;
 };
 
@@ -22,15 +22,18 @@ export const SheetProvider = ({ children }) => {
   const [languageTuples, setLanguageTuples] = useState<GetInitialDataType['languageTuples']>({});
   const [sheetTitles, setSheetTitles] = useState<GetInitialDataType['sheetTitles']>([]);
 
+  const fetchAllData = async () => {
+    const { languageKeys, languageTuples, sheetTitles } = await fetchSheetAccountData();
+    setLanguageKeys(languageKeys);
+    setLanguageTuples(languageTuples);
+    setSheetTitles(sheetTitles);
+  };
+
   useEffect(() => {
-    fetchSheetAccountData().then(({ languageKeys, languageTuples, sheetTitles }) => {
-      setLanguageKeys(languageKeys);
-      setLanguageTuples(languageTuples);
-      setSheetTitles(sheetTitles);
-    });
+    fetchAllData();
   }, []);
 
-  return <SheetContext.Provider value={{ languageKeys, languageTuples, sheetTitles }}>{children}</SheetContext.Provider>;
+  return <SheetContext.Provider value={{ languageKeys, languageTuples, sheetTitles, fetchAllData }}>{children}</SheetContext.Provider>;
 };
 
 export const useSheet = () => {
