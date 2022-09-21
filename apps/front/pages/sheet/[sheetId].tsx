@@ -27,6 +27,7 @@ const Sheet = () => {
     const organizedBodyValues = tableBodyKeys.map((bodyKey) => tableHeaders.map((header) => languageTuples[header][bodyKey]));
     tableBodyKeys.forEach((bodyKey, index) => organizedBodyValues[index].unshift(bodyKey));
     tableHeaders.unshift('key');
+    tableHeaders.push('actions');
     return organizedBodyValues;
   }, [languageTuples, tableBodyKeys, tableHeaders]);
 
