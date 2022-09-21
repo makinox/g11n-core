@@ -5,7 +5,7 @@ import { GeneralRestError } from '../../common/types';
 
 const formatKey = (element: string) => {
   if (element === 'keyName') return 'key';
-  if (element.includes('keyValue')) return element.split('-')[1];
+  if (element.includes('keyValue')) return element.split('%')[1];
   return undefined;
 };
 
@@ -35,6 +35,6 @@ export type addNewElementType = {
   createdIndex: number;
 } & Pick<GeneralRestError, 'error'>;
 
-export type GetInitialDataResponse = addNewElementType | GeneralRestError;
+export type addNewElementResponse = addNewElementType | GeneralRestError;
 
 export default addNewElement;

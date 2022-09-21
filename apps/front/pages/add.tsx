@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import { AddPageStyles } from '../modules/add/styles/add.styles';
+import { addNewElementResponse } from './api/addNewElement';
 import { useSheet } from '../common/contexts/sheetContext';
 import Navbar from '../common/components/Navbar/Navbar';
 import { networkOrigin } from '../common/constants';
@@ -13,6 +14,7 @@ const FORM_KEY_NAME = 'keyName';
 const Add = () => {
   const { languageKeys, sheetTitles } = useSheet();
   const [selectedSheet, setSelectedSheet] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
 
   const classes = {
     container: 'flex items-center flex-col',
@@ -27,7 +29,7 @@ const Add = () => {
 
   const currentKeyValue = useMemo(() => {
     if (!unformatedKeys?.length) return [];
-    return unformatedKeys?.map((value) => `keyValue-${value}`) || [];
+    return unformatedKeys?.map((value) => `keyValue%${value}`) || [];
   }, [unformatedKeys]);
 
   const handleSheetChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -50,8 +52,61 @@ const Add = () => {
       method: 'POST',
       body: JSON.stringify(formData),
     });
-    const data = await response.json();
-    console.log({ data });
+    const data: addNewElementResponse = await response.json();
+    if (response.status !== 200 && 'message' in data) return new Error(data.message);
+    setIsSaved(true);
+  };
+
+  const handleRestart = () => window.location.reload();
+
+  const renderContainer = () => {
+    if (isSaved)
+      return (
+        <div className={classes.container}>
+          <h2>Elemento agregado</h2>
+
+          <button onClick={handleRestart} className={ButtonOutline()} style={{ marginBottom: '10px' }}>
+            Agregar otro elemento
+          </button>
+          <Link href={`/sheet/${sheetTitles[selectedSheet]}`}>
+            <button className={ButtonOutline()}>Ver elementos</button>
+          </Link>
+        </div>
+      );
+
+    return (
+      <div className={classes.container}>
+        <h2>Agregar nuevo elemento</h2>
+
+        <form className={`${AddPageStyles()} ${classes.fieldSet}`} onSubmit={handleSubmit}>
+          <fieldset className={classes.fieldSet}>
+            <label className={classes.label}>Seleccionar hoja</label>
+            <select onChange={handleSheetChange} name={FORM_SHEET_NAME}>
+              {sheetTitles?.map((title) => (
+                <option key={title} value={title}>
+                  {title}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+          <fieldset className={classes.fieldSet}>
+            <label className={classes.label}>Nombre de llave*</label>
+            <input type="text" required name={FORM_KEY_NAME} />
+          </fieldset>
+          {unformatedKeys?.map((langKey, index) => (
+            <fieldset key={langKey} className={classes.fieldSet}>
+              <label className={classes.label}>Valor {langKey}*</label>
+              <input type="text" required name={currentKeyValue[index]} />
+            </fieldset>
+          ))}
+          <fieldset>
+            <button type="submit" className={ButtonOutline()}>
+              Agregar elemento
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    );
   };
 
   return (
@@ -63,37 +118,7 @@ const Add = () => {
             <button className={ButtonOutline()}>Ir atras</button>
           </Link>
         </div>
-        <div className={classes.container}>
-          <h2>Agregar nuevo elemento</h2>
-
-          <form className={`${AddPageStyles()} ${classes.fieldSet}`} onSubmit={handleSubmit}>
-            <fieldset className={classes.fieldSet}>
-              <label className={classes.label}>Seleccionar hoja</label>
-              <select onChange={handleSheetChange} name={FORM_SHEET_NAME}>
-                {sheetTitles?.map((title) => (
-                  <option key={title} value={title}>
-                    {title}
-                  </option>
-                ))}
-              </select>
-            </fieldset>
-            <fieldset className={classes.fieldSet}>
-              <label className={classes.label}>Nombre de llave*</label>
-              <input type="text" required name={FORM_KEY_NAME} />
-            </fieldset>
-            {unformatedKeys?.map((langKey, index) => (
-              <fieldset key={langKey} className={classes.fieldSet}>
-                <label className={classes.label}>Valor {langKey}*</label>
-                <input type="text" required name={currentKeyValue[index]} />
-              </fieldset>
-            ))}
-            <fieldset>
-              <button type="submit" className={ButtonOutline()}>
-                Agregar elemento
-              </button>
-            </fieldset>
-          </form>
-        </div>
+        {renderContainer()}
       </section>
     </>
   );
