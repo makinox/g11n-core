@@ -15,11 +15,13 @@ const TranslateTable = ({
     <table className={TranslateTableStyles()}>
       <thead>
         <tr>
+          <th>KEY</th>
           {tableHeaders.map((header) => (
             <th key={header} style={{ textTransform: 'uppercase' }}>
               {header}
             </th>
           ))}
+          <th>ACTIONS</th>
         </tr>
       </thead>
       <tbody>

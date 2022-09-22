@@ -1,12 +1,12 @@
 import { getInitializedSheet, postARow } from '@g11n-core/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { errorMessages } from '../../common/constants';
+import { errorMessages, stringSeparators } from '../../common/constants';
 import { GeneralRestError } from '../../common/types';
 
 const formatKey = (element: string) => {
   if (element === 'keyName') return 'key';
-  if (element.includes('keyValue')) return element.split('%')[1];
+  if (element.includes('keyValue')) return element.split(stringSeparators.PERCENTAGE)[1];
   return undefined;
 };
 

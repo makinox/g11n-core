@@ -9,9 +9,9 @@ const getInitialData = (req, res) => {
     .then(async (initializedSheet) => {
       const evnviromentData = getEnvData();
       const sheetTitles = evnviromentData.googleSheetDefaultTitles;
-      const { languageKeys, languageTuples } = await readSheet(initializedSheet);
+      const { languageKeys, languageTuplesFormatted } = await readSheet(initializedSheet);
 
-      res.status(200).json({ sheetTitles, languageKeys, languageTuples, error: false });
+      res.status(200).json({ sheetTitles, languageKeys, languageTuples: languageTuplesFormatted, error: false });
     })
     .catch(() => res.status(403).json({ message: errorMessages.NOT_FOUND, error: true }));
 };

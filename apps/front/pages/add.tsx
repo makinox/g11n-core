@@ -2,11 +2,11 @@ import { ButtonOutline, FluidContainer } from '@makinox/makinox-ui';
 import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
 
+import { networkOrigin, stringSeparators } from '../common/constants';
 import { AddPageStyles } from '../modules/add/styles/add.styles';
 import { addNewElementResponse } from './api/addNewElement';
 import { useSheet } from '../common/contexts/sheetContext';
 import Navbar from '../common/components/Navbar/Navbar';
-import { networkOrigin } from '../common/constants';
 
 const FORM_SHEET_NAME = 'sheetName';
 const FORM_KEY_NAME = 'keyName';
@@ -29,7 +29,7 @@ const Add = () => {
 
   const currentKeyValue = useMemo(() => {
     if (!unformatedKeys?.length) return [];
-    return unformatedKeys?.map((value) => `keyValue%${value}`) || [];
+    return unformatedKeys?.map((value) => `keyValue${stringSeparators.PERCENTAGE}${value}`) || [];
   }, [unformatedKeys]);
 
   const handleSheetChange = (event: ChangeEvent<HTMLSelectElement>) => {
