@@ -1,2 +1,2 @@
-type Messages = typeof import('./common/translations/${locale}.json');
+type Messages = typeof import('./common/translations/en.json');
 type IntlMessages = Messages;
