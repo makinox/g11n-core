@@ -56,6 +56,12 @@
       "options": {
         "lintFilePatterns": ["apps/front/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "sync-g11n": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run generator:start --sheet=Front --skip-nx-cache"]
+      }
     }
   },
   "tags": []

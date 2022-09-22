@@ -43,3 +43,4 @@ Thumbs.db
 .env
 g11n.config.ts
 libs/generator/src/common/translations
+apps/front/common/translations
