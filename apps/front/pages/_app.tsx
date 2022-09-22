@@ -1,4 +1,5 @@
 import '@makinox/makinox-ui/dist/index.css';
+import { NextIntlProvider } from 'next-intl';
 import type { AppProps } from 'next/app';
 
 import '../styles/globals.css';
@@ -7,9 +8,11 @@ import { SheetProvider } from '../common/contexts/sheetContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SheetProvider>
-      <Component {...pageProps} />
-    </SheetProvider>
+    <NextIntlProvider messages={pageProps.messages}>
+      <SheetProvider>
+        <Component {...pageProps} />
+      </SheetProvider>
+    </NextIntlProvider>
   );
 }
 

@@ -1,11 +1,13 @@
 import { FluidContainer, ButtonOutline, Card } from '@makinox/makinox-ui';
 import { Fragment, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { useSheet } from '../../../../common/contexts/sheetContext';
 
 const Hero = () => {
   const { languageKeys, languageTuples, sheetTitles } = useSheet();
+  const t = useTranslations();
 
   const totalData = useMemo(() => {
     const languageValues = Object.values(languageTuples || {});
@@ -27,7 +29,7 @@ const Hero = () => {
         <div>
           <article className={Card()} style={{ margin: '10px 0' }}>
             <div className="card-header">
-              <h6 className="headline6">Cuantas traducciones hay</h6>
+              <h6 className="headline6">{t('INDEX_HOW_MANY')}</h6>
               <span className="subtitle1">
                 {languageKeys[0]?.map((lang, index) => (
                   <Fragment key={index}>
