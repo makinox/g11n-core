@@ -1,94 +1,68 @@
+# makinox-g11n
 
+Used:
 
-# G11nCore
+- React
+- Nx
+- Typescript
 
-This project was generated using [Nx](https://nx.dev).
+This is a framework to manage project translations.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+Mainly and in its first version it only works with google sheets but you are welcome to add more, I chose google sheets because it is free.
 
-🔎 **Smart, Fast and Extensible Build System**
+## Initialize
 
-## Adding capabilities to your workspace
+You must create a file with these private variables
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+```ts
+export default {
+  TRANSLATION_DIR: './apps/front/common/translations', // Place where the translations will be saved
+  GOOGLE_SHEET_DEFAULT_TITLES: ['foo', 'faa', 'fee'], // Sheets to be read, you can also specify a sheet with this argument --sheet
+  GOOGLE_SHEET_ID: 'xxxxxxx', // Google Sheet ID that appears in the URL
+  GOOGLE_CLIENT_EMAIL: 'xxxxxxxx', // These last two data are taken from the google developer console creating an IAM user
+  GOOGLE_PRIVATE_KEY: 'xxxxxxx',
+};
+```
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+## Identify
 
-Below are our core plugins:
+Identifies the google sheet and create the data with this format
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+| key     | lang  | lang  | lang  | lang  |
+|---------|-------|-------|-------|-------|
+| keyName | value | value | value | value |
+| keyName | value | value | value | value |
+| keyName | value | value | value | value |
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+## Generate
 
-## Generate an application
+At this point you already have the data, it only remains to generate those files to json, in the future I would like to be able to generate it in more formats.
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+```bash
+# Install the dependencies
+yarn
+-----
+yarn install
+-----
+npm install
+```
 
-> You can use any of the plugins above to generate applications as well.
+```bash
+# Generate all sheets
+nx run generator:start
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```bash
+# Generate a specific sheet
+nx run generator:start --sheet=Front
+```
 
-## Generate a library
+The files will be generated where you specified in `TRANSLATION_DIR`
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+## Watch
 
-> You can also use any of the plugins above to generate libraries as well.
+You can find, see and modify all translations of all your sheets in the app running this command
 
-Libraries are shareable across libraries and applications. They can be imported from `@makinox-g11n/mylib`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+```bash
+nx run front:serve
+```
