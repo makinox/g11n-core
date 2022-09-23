@@ -1,5 +1,7 @@
 import { ButtonOutline, FluidContainer } from '@makinox/makinox-ui';
 import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
+import { GetStaticPropsContext } from 'next';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { networkOrigin, stringSeparators } from '../common/constants';
@@ -15,6 +17,7 @@ const Add = () => {
   const { languageKeys, sheetTitles } = useSheet();
   const [selectedSheet, setSelectedSheet] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
+  const t = useTranslations();
 
   const classes = {
     container: 'flex items-center flex-col',
@@ -63,24 +66,24 @@ const Add = () => {
     if (isSaved)
       return (
         <div className={classes.container}>
-          <h2>Elemento agregado</h2>
+          <h2>{t('ADDED_ELEMENT')}</h2>
 
           <button onClick={handleRestart} className={ButtonOutline()} style={{ marginBottom: '10px' }}>
-            Agregar otro elemento
+            {t('ADD_OTHER_ELEMENT')}
           </button>
           <Link href={`/sheet/${sheetTitles[selectedSheet]}`}>
-            <button className={ButtonOutline()}>Ver elementos</button>
+            <button className={ButtonOutline()}>{t('SEE_ITEMS')}</button>
           </Link>
         </div>
       );
 
     return (
       <div className={classes.container}>
-        <h2>Agregar nuevo elemento</h2>
+        <h2>{t('INDEX_ADD_NEW')}</h2>
 
         <form className={`${AddPageStyles()} ${classes.fieldSet}`} onSubmit={handleSubmit}>
           <fieldset className={classes.fieldSet}>
-            <label className={classes.label}>Seleccionar hoja</label>
+            <label className={classes.label}>{t('INDEX_SELECT')}</label>
             <select onChange={handleSheetChange} name={FORM_SHEET_NAME}>
               {sheetTitles?.map((title) => (
                 <option key={title} value={title}>
@@ -90,18 +93,20 @@ const Add = () => {
             </select>
           </fieldset>
           <fieldset className={classes.fieldSet}>
-            <label className={classes.label}>Nombre de llave*</label>
+            <label className={classes.label}>{t('INDEX_KEY_NAME')}*</label>
             <input type="text" required name={FORM_KEY_NAME} />
           </fieldset>
           {unformatedKeys?.map((langKey, index) => (
             <fieldset key={langKey} className={classes.fieldSet}>
-              <label className={classes.label}>Valor {langKey}*</label>
+              <label className={classes.label}>
+                {t('INDEX_VALUE')} {langKey}*
+              </label>
               <input type="text" required name={currentKeyValue[index]} />
             </fieldset>
           ))}
-          <fieldset>
+          <fieldset className="flex justify-center">
             <button type="submit" className={ButtonOutline()}>
-              Agregar elemento
+              {t('INDEX_ADD_ELEMENT')}
             </button>
           </fieldset>
         </form>
@@ -115,13 +120,21 @@ const Add = () => {
       <section className={FluidContainer()} style={{ marginTop: '20px' }}>
         <div>
           <Link href="/">
-            <button className={ButtonOutline()}>Ir atras</button>
+            <button className={ButtonOutline()}>{t('INDEX_GO_BACK')}</button>
           </Link>
         </div>
         {renderContainer()}
       </section>
     </>
   );
+};
+
+export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
+  return {
+    props: {
+      messages: (await import(`../common/translations/${locale}.json`)).default,
+    },
+  };
 };
 
 export default Add;

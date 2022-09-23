@@ -12,12 +12,12 @@ const Home = () => {
   );
 };
 
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
+export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
   return {
     props: {
       messages: (await import(`../common/translations/${locale}.json`)).default,
     },
   };
-}
+};
 
 export default Home;

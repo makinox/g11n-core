@@ -42,7 +42,7 @@ const Hero = () => {
 
           <article className={Card()} style={{ margin: '10px 0' }}>
             <div className="card-header">
-              <h6 className="headline6">Hojas disponibles</h6>
+              <h6 className="headline6">{t('INDEX_AVAILABLE')}</h6>
               <span className="subtitle1">
                 {sheetTitles.map((titles, index) => (
                   <span key={index} style={{ margin: '0 1px' }}>
@@ -57,7 +57,7 @@ const Hero = () => {
             {sheetTitles.map((titles) => (
               <Link key={titles} href={`sheet/${titles}`}>
                 <button className={ButtonOutline()} style={{ margin: '5px 0' }}>
-                  Ir a la hoja {titles}
+                  {t('INDEX_GO_TO')} {titles}
                 </button>
               </Link>
             ))}
@@ -67,25 +67,25 @@ const Hero = () => {
         <div className="flex flex-col">
           <article className={Card()} style={{ margin: '10px 0' }}>
             <div className="card-header">
-              <h6 className="headline6">Total de traducciones</h6>
+              <h6 className="headline6">{t('INDEX_TOTAL_TRANSLATIONS')}</h6>
               <span className="subtitle1">{totalData.totalTranslations}</span>
             </div>
           </article>
           <article className={Card()} style={{ margin: '10px 0' }}>
             <div className="card-header">
-              <h6 className="headline6">Total de traducciones por idioma</h6>
+              <h6 className="headline6">{t('INDEX_TOTAL_BY_LANGUAGE')}</h6>
               <span className="subtitle1">{totalData.totalTranslationsByLang}</span>
             </div>
           </article>
           <article className={Card()} style={{ margin: '10px 0' }}>
             <div className="card-header">
-              <h6 className="headline6">Total espacios sin traducir</h6>
+              <h6 className="headline6">{t('INDEX_TOTAL_EMPTY')}</h6>
               <span className="subtitle1">{totalData.totalEmptyTranslation}</span>
             </div>
           </article>
           <div className="flex justify-left">
             <Link href="/add">
-              <button className={ButtonOutline()}>agregar mas traducciones</button>
+              <button className={ButtonOutline()}>{t('INDEX_ADD_MORE')}</button>
             </Link>
           </div>
         </div>

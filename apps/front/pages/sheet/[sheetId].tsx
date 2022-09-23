@@ -1,4 +1,6 @@
 import { ButtonOutline, FluidContainer } from '@makinox/makinox-ui';
+import { GetStaticPropsContext } from 'next';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import Link from 'next/link';
@@ -11,7 +13,9 @@ import { networkOrigin, stringSeparators } from '../../common/constants';
 
 const Sheet = () => {
   const { languageTuples, fetchAllData } = useSheet();
+  const t = useTranslations();
   const router = useRouter();
+
   const sheetTitle = router.query['sheetId'] as string;
 
   const handleDelete = async (deleteIndex: number) => {
@@ -61,7 +65,7 @@ const Sheet = () => {
       <section className={FluidContainer()} style={{ marginTop: '20px' }}>
         <div>
           <Link href="/">
-            <button className={ButtonOutline()}>Ir atras</button>
+            <button className={ButtonOutline()}>{t('INDEX_GO_BACK')}</button>
           </Link>
         </div>
         <div className="flex justify-center">
@@ -70,13 +74,28 @@ const Sheet = () => {
         <div className="flex justify-center">
           <Link href="/add">
             <button className={ButtonOutline()} style={{ marginTop: '20px' }}>
-              agregar mas traducciones
+              {t('INDEX_ADD_MORE')}
             </button>
           </Link>
         </div>
       </section>
     </>
   );
+};
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { sheetId: 'Any' } }],
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
+  return {
+    props: {
+      messages: (await import(`../../common/translations/${locale}.json`)).default,
+    },
+  };
 };
 
 export default Sheet;

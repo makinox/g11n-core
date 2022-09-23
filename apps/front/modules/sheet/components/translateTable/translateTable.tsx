@@ -1,4 +1,5 @@
 import { ButtonOutline } from '@makinox/makinox-ui';
+import { useTranslations } from 'next-intl';
 
 import { TranslateTableStyles } from './translateTable.styles';
 
@@ -11,6 +12,8 @@ const TranslateTable = ({
   tableBodyValues: Array<Array<string>>;
   onDelete: (deleteIndex: number) => Promise<Error>;
 }) => {
+  const t = useTranslations();
+
   return (
     <table className={TranslateTableStyles()}>
       <thead>
@@ -21,7 +24,7 @@ const TranslateTable = ({
               {header}
             </th>
           ))}
-          <th>ACTIONS</th>
+          <th>{t('ACTIONS')}</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +36,7 @@ const TranslateTable = ({
             <td>
               <div className="flex justify-center">
                 <button className={ButtonOutline()} onClick={() => onDelete(idx)}>
-                  DELETE
+                  {t('DELETE')}
                 </button>
               </div>
             </td>
