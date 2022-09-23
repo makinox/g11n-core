@@ -2,6 +2,7 @@ import { ButtonOutline, FluidContainer } from '@makinox/makinox-ui';
 import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import { networkOrigin, stringSeparators } from '../common/constants';
@@ -117,6 +118,9 @@ const Add = () => {
   return (
     <>
       <Navbar />
+      <Head>
+        <title>{t('INDEX_ADD_NEW')}</title>
+      </Head>
       <section className={FluidContainer()} style={{ marginTop: '20px' }}>
         <div>
           <Link href="/">

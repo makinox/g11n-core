@@ -10,6 +10,7 @@ import { removeElementResponse } from '../../pages/api/removeElement';
 import { useSheet } from '../../common/contexts/sheetContext';
 import Navbar from '../../common/components/Navbar/Navbar';
 import { networkOrigin, stringSeparators } from '../../common/constants';
+import Head from 'next/head';
 
 const Sheet = () => {
   const { languageTuples, fetchAllData } = useSheet();
@@ -62,6 +63,9 @@ const Sheet = () => {
   return (
     <>
       <Navbar />
+      <Head>
+        <title>{t('INDEX_ADD_MORE')}</title>
+      </Head>
       <section className={FluidContainer()} style={{ marginTop: '20px' }}>
         <div>
           <Link href="/">
