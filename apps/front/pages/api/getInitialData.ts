@@ -1,4 +1,4 @@
-import { getEnvData, getInitializedSheet, readSheet, SheetResult } from '@g11n-core/generator';
+import { getEnvData, getInitializedSheet, readSheet, SheetResult } from '@makinox-g11n/generator';
 
 import { errorMessages } from '../../common/constants';
 import { GeneralRestError } from '../../common/types';

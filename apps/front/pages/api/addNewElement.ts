@@ -1,4 +1,4 @@
-import { getInitializedSheet, postARow } from '@g11n-core/generator';
+import { getInitializedSheet, postARow } from '@makinox-g11n/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { errorMessages, stringSeparators } from '../../common/constants';

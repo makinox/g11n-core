@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@g11n-core/generator": ["libs/generator/src/index.ts"]
+      "@makinox-g11n/generator": ["libs/generator/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

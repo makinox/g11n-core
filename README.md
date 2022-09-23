@@ -45,7 +45,7 @@ Run `nx g @nrwl/react:lib my-lib` to generate a library.
 
 > You can also use any of the plugins above to generate libraries as well.
 
-Libraries are shareable across libraries and applications. They can be imported from `@g11n-core/mylib`.
+Libraries are shareable across libraries and applications. They can be imported from `@makinox-g11n/mylib`.
 
 ## Development server
 

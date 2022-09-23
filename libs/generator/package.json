@@ -1,5 +1,5 @@
 {
-  "name": "@g11n-core/generator",
+  "name": "@makinox-g11n/generator",
   "version": "0.0.1",
   "type": "commonjs",
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "extends": "nx/presets/core.json",
-  "npmScope": "g11n-core",
+  "npmScope": "makinox-g11n",
   "affected": {
     "defaultBase": "main"
   },

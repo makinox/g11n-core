@@ -1,4 +1,4 @@
-import { deleteARow, getInitializedSheet } from '@g11n-core/generator';
+import { deleteARow, getInitializedSheet } from '@makinox-g11n/generator';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { errorMessages } from '../../common/constants';
