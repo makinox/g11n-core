@@ -1,7 +1,51 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "ignorePatterns": ["**/*", "**/node_modules/**/*"],
+  "plugins": ["@nrwl/nx", "prettier", "prefer-arrow"],
+  "extends": ["plugin:prettier/recommended"],
+  "rules": {
+    "curly": ["error", "multi"],
+    "max-params": ["error", 3],
+    "react/react-in-jsx-scope": "off",
+    "max-lines-per-function": [
+      "error",
+      {
+        "max": 210
+      }
+    ],
+    "max-lines": ["error", 350],
+    "no-unused-vars": "off",
+    "complexity": ["error", 7],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "generic"
+      }
+    ],
+    "prefer-arrow/prefer-arrow-functions": [
+      "error",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+      {
+        "usePrettierrc": true
+      }
+    ]
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],

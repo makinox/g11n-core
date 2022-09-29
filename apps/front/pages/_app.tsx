@@ -6,7 +6,7 @@ import '../styles/globals.css';
 import '../styles/colors.css';
 import { SheetProvider } from '../common/contexts/sheetContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <NextIntlProvider messages={pageProps.messages}>
       <SheetProvider>
@@ -14,6 +14,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </SheetProvider>
     </NextIntlProvider>
   );
-}
+};
 
 export default MyApp;

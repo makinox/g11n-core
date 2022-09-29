@@ -2,7 +2,7 @@ import { FaTwitterSquare, FaLinkedin, FaHome } from 'react-icons/fa';
 import { FluidContainer, TopBar } from '@makinox/makinox-ui';
 import { NavbarSection } from './Navbar.styles';
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <header className={`${TopBar({ isDark: false })} ${NavbarSection()}`}>
       <nav className={`flex justify-between items-center ${FluidContainer()} `}>
@@ -24,4 +24,6 @@ export default function Navbar() {
       </nav>
     </header>
   );
-}
+};
+
+export default Navbar;

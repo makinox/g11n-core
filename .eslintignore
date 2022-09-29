@@ -1,0 +1,6 @@
+**/*.generated.tsx
+**/*factories.ts
+**/*schema.ts
+**/*apolloHelpers.ts
+./**/generator/node_modules/**/*.js
+**/node_modules/**

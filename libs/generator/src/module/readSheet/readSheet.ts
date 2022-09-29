@@ -12,7 +12,7 @@ export const readSheet = async (sheetDocument: GoogleSpreadsheet) => {
   await sheetDocument.loadInfo();
 
   const languageTuplesFormatted: SheetResult = {};
-  const languageKeys: Array<string[]> = [];
+  const languageKeys: Array<Array<string>> = [];
   const languageTuples: SheetResult = {};
   const sheetTitles = getSheetTitles();
 

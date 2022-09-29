@@ -1,6 +1,6 @@
 import { TopBar, FluidContainer } from '@makinox/makinox-ui';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className={TopBar()}>
       <div className={FluidContainer()} style={{ padding: '10px 0' }}>
@@ -8,4 +8,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

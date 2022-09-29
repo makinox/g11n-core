@@ -18,7 +18,7 @@ const getInitialData = (req, res) => {
 
 export type GetInitialDataType = {
   sheetTitles: Array<string>;
-  languageKeys: string[][];
+  languageKeys: Array<Array<string>>;
   languageTuples: SheetResult;
 } & Pick<GeneralRestError, 'error'>;
 

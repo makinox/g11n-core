@@ -66,3 +66,7 @@ You can find, see and modify all translations of all your sheets in the app runn
 ```bash
 nx run front:serve
 ```
+
+## Contributing
+
+If you're interested in contributing to project, please read our [contributing docs](https://github.com/makinox/makinox-g11n/blob/main/.github/CONTRIBUTING.md) **before submitting a pull request**.
